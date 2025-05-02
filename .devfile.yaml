@@ -4,7 +4,7 @@ metadata:
 components:
   - name: tools
     container:
-      image: alpine
+      image: quay.io/devfile/universal-developer-image:ubi8-latest
       memoryLimit: 256Mi
       mountSources: true
 commands:
