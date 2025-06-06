@@ -1,0 +1,13 @@
+apiVersion: controller.devfile.io/v1alpha1
+config:
+  enableExperimentalFeatures: true
+  routing:
+    clusterHostSuffix: 127.0.0.1.nip.io
+    defaultRoutingClass: basic
+  workspace:
+    imagePullPolicy: Always
+    storageAccessMode:
+    - ReadWriteMany
+kind: DevWorkspaceOperatorConfig
+metadata:
+  name: external-dwoc-storageaccess-rwx

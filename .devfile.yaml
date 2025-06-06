@@ -4,8 +4,8 @@ metadata:
 attributes:
   controller.devfile.io/storage-type: common
   controller.devfile.io/devworkspace-config:
-    name: external-dwoc-test
-    namespace: devworkspace-controller
+    name: external-dwoc-storageaccess-rwx
+    namespace: openshift-operators
 projects:
   - name: devspaces-test-reproducer
     git:
