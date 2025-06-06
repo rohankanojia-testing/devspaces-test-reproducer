@@ -1,0 +1,40 @@
+schemaVersion: 2.2.0
+metadata:
+  name: simple-devfile
+components:
+  - name: tools
+    container:
+      image: quay.io/devfile/universal-developer-image:ubi8-latest
+      memoryLimit: 256Mi
+      mountSources: true
+commands:
+  - id: event-one
+    exec:
+      commandLine: >-
+        sleep 5 &&
+        date > event-one-date.txt &&
+        sleep 5
+      component: tools
+      workingDir: "${HOME}"
+  - id: event-two
+    exec:
+      commandLine: >-
+        sleep 5 &&
+        date > event-two-date.txt &&
+        sleep 5
+      component: tools
+      workingDir: "${HOME}"
+  - id: event-three
+    exec:
+      commandLine: >-
+        sleep 5 &&
+        date > event-three-date.txt &&
+        sleep 5
+      component: tools
+      workingDir: "${HOME}"
+events:
+  postStart:
+    - event-one
+    - event-two
+    - event-three
+
