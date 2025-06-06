@@ -7,10 +7,10 @@ attributes:
     name: external-dwoc-test
     namespace: devworkspace-controller
 projects:
-  - name: web-nodejs-sample
+  - name: devspaces-test-reproducer
     git:
       remotes:
-        origin: https://github.com/che-samples/web-nodejs-sample.git
+        origin: https://github.com/rohankanojia-demos/devspaces-test-reproducer.git
 components:
   - name: tools
     container:
