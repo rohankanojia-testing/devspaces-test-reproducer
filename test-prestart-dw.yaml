@@ -30,7 +30,7 @@ spec:
           - "eclipse-jkube-demo-project/readme.md"
       - name: license
         container:
-          image: quay.io/devfile/universal-developer-image:ubi8-latest
+          image: quay.io/devfile/universal-developer-image:ubi9-latest
           mountSources: true
           sourceMapping: /projects
           command:
