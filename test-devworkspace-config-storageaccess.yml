@@ -10,5 +10,4 @@ config:
     - ReadWriteMany
 kind: DevWorkspaceOperatorConfig
 metadata:
-  name: external-dwoc-storageaccess-rwx
-  namespace: openshift-operators
+  name: external-dwoc-test

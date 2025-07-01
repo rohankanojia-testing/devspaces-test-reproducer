@@ -1,0 +1,32 @@
+kind: DevWorkspace
+apiVersion: workspace.devfile.io/v1alpha2
+metadata:
+  name: plain-dw-endpoint-annotations
+  labels:
+    controller.devfile.io/creator: "abc"
+spec:
+  started: true
+  routingClass: 'basic'
+  template:
+    components:
+      - name: web-terminal
+        container:
+          image: quay.io/wto/web-terminal-tooling:next
+          memoryRequest: 256Mi
+          memoryLimit: 512Mi
+          mountSources: true
+          command:
+           - "tail"
+           - "-f"
+           - "/dev/null"
+          annotation:
+            service:
+              first-service-annotation: test
+              second-service-annotation: test2
+          endpoints:
+          - name: endpoint-1
+            targetPort: 8080
+            protocol: http
+            annotation:
+              first-endpoint-annotation: test1
+              second-endpoint-annotation: test2

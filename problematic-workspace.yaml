@@ -1,0 +1,23 @@
+apiVersion: workspace.devfile.io/v1alpha2
+kind: DevWorkspace
+metadata:
+  name: problematic-workspace
+spec:
+  started: true
+  template:
+    components:
+      - name: tools
+        container:
+          image: quay.io/devfile/universal-developer-image:ubi9-latest 
+          memoryLimit: "1Gi"
+          memoryRequest: "512Mi"
+          cpuRequest: "250m"
+          cpuLimit: "1000m"
+    commands:
+      - id: sleep-infinity-cmd
+        exec:
+          component: tools
+          commandLine: "echo 'PostStart: Starting infinite sleep...'; sleep infinity; echo 'PostStart: Sleep finished (should not be reached)'"
+    events:
+      postStart:
+        - sleep-infinity-cmd

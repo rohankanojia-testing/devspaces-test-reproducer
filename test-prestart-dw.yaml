@@ -1,0 +1,50 @@
+apiVersion: workspace.devfile.io/v1alpha2
+kind: DevWorkspace
+metadata:
+  name: simple-devfile-prestart
+spec:
+  started: true
+  template:
+    projects:
+      - name: eclipse-jkube-demo-project
+        clonePath: eclipse-jkube-demo-project
+        git:
+          remotes:
+            origin: https://github.com/rohanKanojia/eclipse-jkube-demo-project.git
+          checkoutFrom:
+            revision: main
+    components:
+      - name: tools
+        container:
+          image: quay.io/devfile/universal-developer-image:ubi9-latest
+          memoryLimit: 256Mi
+          mountSources: true
+          sourceMapping: /projects
+      - name: readme
+        container:
+          image: quay.io/devfile/universal-developer-image:ubi9-latest
+          mountSources: true
+          sourceMapping: /projects
+          command:
+          - "cat"
+          - "eclipse-jkube-demo-project/readme.md"
+      - name: license
+        container:
+          image: quay.io/devfile/universal-developer-image:ubi8-latest
+          mountSources: true
+          sourceMapping: /projects
+          command:
+          - "cat"
+          - "eclipse-jkube-demo-project/license.txt"
+    commands:
+      - id: project-license
+        apply:
+          component: license
+      - id: project-readme
+        apply:
+          component: readme
+    events:
+      preStart:
+        - project-license
+        - project-readme
+

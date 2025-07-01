@@ -1,0 +1,27 @@
+schemaVersion: 2.2.0
+metadata:
+  name: simple-project
+components:
+  - name: ephemeral-storage
+    volume:
+      size: 1Gi
+      ephemeral: true
+    attributes:
+      controller.devfile.io/storage-type: ephemeral
+  - name: app-container
+    container:
+      image: quay.io/devfile/universal-developer-image:ubi9-latest
+      memoryLimit: 256Mi
+      mountSources: true
+commands:
+  - id: build
+    exec:
+      component: app-container
+      commandLine: "echo Building project..."
+      workingDir: /projects
+  - id: run
+    exec:
+      component: app-container
+      commandLine: "echo Running application..."
+      workingDir: /projects
+
