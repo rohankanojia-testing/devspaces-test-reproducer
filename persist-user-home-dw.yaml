@@ -1,0 +1,28 @@
+apiVersion: workspace.devfile.io/v1alpha2
+kind: DevWorkspace
+metadata:
+  name: persist-user-home-test
+spec:
+  started: true
+  template:
+    components:
+      - name: tools
+        container:
+          image: quay.io/devfile/universal-developer-image:ubi9-latest
+          memoryRequest: 512Mi
+          cpuRequest: 250m
+          command: ["/bin/sh"]
+          args: ["-c", "while true; do sleep 10000; done"]
+          mountSources: true
+          volumeMounts:
+            - name: user-home
+              path: /home/user
+      - name: user-home
+        volume:
+          size: 1Gi
+    commands:
+      - id: list-user-home
+        exec:
+          label: "List /home/user"
+          component: tools
+          commandLine: "ls -la /home/user"

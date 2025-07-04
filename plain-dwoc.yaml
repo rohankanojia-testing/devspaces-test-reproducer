@@ -1,0 +1,9 @@
+apiVersion: controller.devfile.io/v1alpha1  
+metadata:
+  name: devworkspace-operator-config 
+config:  
+ routing:  
+   defaultRoutingClass: basic  
+ workspace:  
+   imagePullPolicy: Always  
+kind: DevWorkspaceOperatorConfig
