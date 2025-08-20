@@ -1,10 +1,15 @@
-schemaVersion: 2.2.0
+schemaVersion: 2.3.0
 metadata:
   name: plain-dw-endpoint-annotations
+attributes:
+  devworkspace.org/started: "true"
 components:
   - name: web-terminal
     container:
       image: quay.io/wto/web-terminal-tooling:next
+      memoryRequest: 256Mi
+      memoryLimit: 512Mi
+      mountSources: true
       command:
        - "tail"
        - "-f"
