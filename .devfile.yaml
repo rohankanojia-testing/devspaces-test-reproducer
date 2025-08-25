@@ -1,22 +1,17 @@
 schemaVersion: 2.2.0
 metadata:
-  name: plain-dw-endpoint-annotations
+  name: plain-devworkspace
+attributes:
+  devworkspace.org/started: "true"
 components:
   - name: web-terminal
     container:
-      image: quay.io/wto/web-terminal-tooling:next
+      image: docker.io/rohankanojia/base-developer-image:case1
+      memoryRequest: 256Mi
+      memoryLimit: 512Mi
+      mountSources: true
       command:
-       - "tail"
-       - "-f"
-       - "/dev/null"
-      annotation:
-        service:
-          first-service-annotation: test
-          second-service-annotation: test2
-      endpoints:
-      - name: endpoint-1
-        targetPort: 8080
-        protocol: http
-        annotation:
-          first-endpoint-annotation: test1
-          second-endpoint-annotation: test2
+        - tail
+        - -f
+        - /dev/null
+
