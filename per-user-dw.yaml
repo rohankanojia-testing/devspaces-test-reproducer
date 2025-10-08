@@ -1,0 +1,18 @@
+apiVersion: workspace.devfile.io/v1alpha2
+kind: DevWorkspace
+metadata:
+  name: go-common-storage
+spec:
+  started: true
+  template:
+    attributes:
+      controller.devfile.io/storage-type: per-user
+    components:
+      - name: runtime
+        container:
+          image: registry.access.redhat.com/ubi9/go-toolset:1.19.13-4.1697647145
+          command: ["tail", "-f", "/dev/null"]
+          memoryLimit: 1Gi
+          mountSources: true
+          sourceMapping: /projects
+

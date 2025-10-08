@@ -1,0 +1,33 @@
+apiVersion: workspace.devfile.io/v1alpha2
+kind: DevWorkspace
+metadata:
+  name: trap-dw-failure-test 
+  annotations:
+    controller.devfile.io/debug-start: "true"
+spec:
+  started: true
+  template:
+    components:
+      - name: tools
+        container:
+          image: alpine:latest
+          command: [ "tail" ]
+          args: [ "-f", "/dev/null" ]
+    commands:
+      - id: failing-command
+        exec:
+          commandLine: |
+            cat << 'EOF' > /tmp/dummy-script.sh
+            #!/bin/sh
+            echo "Dummy script started"
+            echo "This is stdout"
+            echo "This is stderr" >&2
+            exit 1
+            EOF
+            chmod +x /tmp/dummy-script.sh
+            trap 'echo "[postStart] ❌ fail.sh failed at $(date)" >&2; sleep 3600' ERR; /tmp/dummy-script.sh
+          component: tools
+
+    events:
+      postStart:
+        - failing-command

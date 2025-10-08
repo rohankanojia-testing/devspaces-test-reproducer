@@ -1,0 +1,24 @@
+apiVersion: workspace.devfile.io/v1alpha2
+kind: DevWorkspace
+metadata:
+  name: failing-post-start-ws
+  annotations:
+    controller.devfile.io/debug-start: "true"
+spec:
+  started: true
+  template:
+    components:
+      - name: tools
+        container:
+          image: quay.io/wto/web-terminal-tooling:next
+          sourceMapping: /projects
+          command: [ "tail" ]
+          args: [ "-f", "/dev/null" ]
+    commands:
+      - id: failing-command
+        exec:
+          commandLine: ls idontexist
+          component: tools
+    events:
+      postStart:
+        - failing-command
